@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PurchaseController;
-use App\Http\Controllers\Api\ServerController;
 use App\Http\Controllers\Api\SocialController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ReminderController;
@@ -42,10 +43,22 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/purchase', [PurchaseController::class, 'addPurchase'])->name('api.add.purchase');
 
     Route::post('/purchase/status', [PurchaseController::class, 'Status'])->name('api.purchase');
+
+    Route::get('/cars', [CarController::class, 'cars'])->name('api.cars');
+
+    Route::post('/cars/add', [CarController::class, 'addCar'])->name('api.add.car');
+
+    Route::get('/cars/{id}', [CarController::class, 'show'])->name('api.update.car');
+
+    Route::put('/cars/{id}', [CarController::class, 'update'])->name('api.update.car');
+
+    Route::delete('/cars/{id}', [CarController::class, 'delete'])->name('api.delete.car');
+
+    Route::get('/user/license', [UserController::class, 'show'])->name('user.license.show');
+    
+    Route::post('/user/license', [UserController::class, 'store'])->name('user.license.store');
 });
 
 Route::post('/email/resend-verification', [VerifyController::class, 'resendVerify'])->name('api.verify.resend');
-
-Route::get('/servers', [ServerController::class, 'index'])->name('api.all.servers');
 
 Route::get('/options', [OptionController::class, 'getOptions'])->name('api.options');

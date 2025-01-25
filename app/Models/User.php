@@ -13,10 +13,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -55,6 +57,22 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    protected $appends = ['license_url'];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('license')
+            ->useDisk('media')
+            ->singleFile()
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/gif', 'image/bmp']);
+    }
+
+    public function getLicenseUrlAttribute()
+    {
+        $media = $this->getFirstMedia('license');
+        return $media ? $media->getUrl() : null;
+    }
+
     /**
      * Send the email verification notification.
      *
@@ -84,5 +102,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function reminders()
     {
         return $this->hasMany(Reminder::class);
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
     }
 }
