@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\DeviceTokenController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ReminderController;
@@ -56,7 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/cars/{id}', [CarController::class, 'delete'])->name('api.delete.car');
 
     Route::get('/user/license', [UserController::class, 'show'])->name('user.license.show');
-    
+
     Route::post('/user/license', [UserController::class, 'store'])->name('user.license.store');
 });
 
@@ -65,3 +66,5 @@ Route::post('/email/resend-verification', [VerifyController::class, 'resendVerif
 Route::get('/options', [OptionController::class, 'getOptions'])->name('api.options');
 
 Route::get('/notifications', [NotificationController::class, 'notifications'])->name('api.notifications');
+
+Route::post('/device/token', [DeviceTokenController::class, 'store']);
