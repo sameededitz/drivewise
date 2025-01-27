@@ -41,4 +41,14 @@ class NotificationController extends Controller
             'message' => 'Notification deleted successfully',
         ]);
     }
+
+    public function notifications()
+    {
+        $notifications = Notification::all();
+        return response()->json([
+            'status' => true,
+            'message' => 'Notifications retrieved successfully!',
+            'notifications' => $notifications,
+        ]);
+    }
 }

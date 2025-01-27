@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ReminderController;
 use Illuminate\Support\Facades\Route;
@@ -62,3 +63,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/email/resend-verification', [VerifyController::class, 'resendVerify'])->name('api.verify.resend');
 
 Route::get('/options', [OptionController::class, 'getOptions'])->name('api.options');
+
+Route::get('/notifications', [NotificationController::class, 'notifications'])->name('api.notifications');
