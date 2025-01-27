@@ -84,9 +84,9 @@ class CarController extends Controller
         }        
 
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|string|max:255|min:3',
-            'model' => 'nullable|string|max:255|min:3',
-            'model_year' => 'nullable|integer|digits:4',
+            'name' => 'required|string|max:255|min:3',
+            'model' => 'required|string|max:255|min:3',
+            'model_year' => 'required|integer|digits:4',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:20420',
         ]);
 
