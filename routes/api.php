@@ -52,9 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/cars/{car}', [CarController::class, 'show'])->name('api.update.car');
 
-    Route::put('/cars/{id}', [CarController::class, 'update'])->name('api.update.car');
+    Route::put('/cars/{car}', [CarController::class, 'update'])->name('api.update.car');
 
-    Route::delete('/cars/{id}', [CarController::class, 'delete'])->name('api.delete.car');
+    Route::delete('/cars/{car}', [CarController::class, 'delete'])->name('api.delete.car');
 
     Route::get('/user/license', [UserController::class, 'show'])->name('user.license.show');
 

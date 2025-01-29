@@ -82,7 +82,7 @@ class CarController extends Controller
                 'status' => false,
                 'message' => 'Unauthorized action.'
             ], 403);
-        }        
+        }    
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|min:3',
@@ -120,6 +120,12 @@ class CarController extends Controller
 
     public function delete(Car $car)
     {
+        if ($car->user_id !== Auth::id()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized action.'
+            ], 403);
+        }
         $car->clearMediaCollection('image');
         $car->delete();
         return response()->json([
