@@ -18,7 +18,7 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/signup', [AuthController::class, 'signup'])->name('api.signup');
 
-    Route::post('/auth/google', [SocialController::class, 'handleAppleCallback'])->name('api.auth.google');
+    Route::post('/auth/google', [SocialController::class, 'handleGoogleCallback'])->name('api.auth.google');
 
     Route::post('/auth/apple', [SocialController::class, 'handleAppleCallback'])->name('api.auth.apple');
 
