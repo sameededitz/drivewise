@@ -25,7 +25,7 @@ class DeviceTokenController extends Controller
 
         if ($exists) {
             return response()->json([
-                'status' => false,
+                'status' => true,
                 'message' => 'This FCM token already exists.',
             ], 409); // 409 Conflict HTTP status code
         }
@@ -35,6 +35,6 @@ class DeviceTokenController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'FCM token added successfully!',
-        ]);
+        ], 201); // 201 Created HTTP status code
     }
 }
