@@ -50,7 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/cars/add', [CarController::class, 'addCar'])->name('api.add.car');
 
-    Route::get('/cars/{id}', [CarController::class, 'show'])->name('api.update.car');
+    Route::get('/cars/{car}', [CarController::class, 'show'])->name('api.update.car');
 
     Route::put('/cars/{id}', [CarController::class, 'update'])->name('api.update.car');
 
