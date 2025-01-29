@@ -60,7 +60,6 @@ class CarController extends Controller
 
     public function show(Car $car)
     {
-        dd($car, Auth::user());
         if ($car->user_id !== Auth::id()) {
             return response()->json([
                 'status' => false,
