@@ -11,8 +11,6 @@ use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
 
 class SendNotification extends Notification
 {
-    use Queueable;
-
     public $title;
     public $body;
 
@@ -33,12 +31,24 @@ class SendNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toFcm(): FcmMessage
+    public function toFcm($notifiable): FcmMessage
     {
         return (new FcmMessage(notification: new FcmNotification(
             title: $this->title,
-            body: $this->body,
+            body: $this->body
         )))
-            ->data(['click_action' => 'FLUTTER_NOTIFICATION_CLICK']);
+            ->data(['data1' => 'value', 'data2' => 'value2'])  // Additional data
+            ->custom([
+                'android' => [
+                    'notification' => [
+                        'color' => '#0A0A0A',
+                    ],
+                ],
+                'apns' => [
+                    'fcm_options' => [
+                        'analytics_label' => 'analytics',
+                    ],
+                ],
+            ]);
     }
 }
